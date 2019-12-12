@@ -26,17 +26,22 @@ import com.sun.jna.platform.win32.WinGDI.BITMAPINFO;
 import com.sun.jna.platform.win32.WinNT.HANDLE;
 import java.io.File;
 import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.util.Date; 
+import java.util.Calendar; 
 
 public class Paint extends JFrame {
 
 public BufferedImage capture(HWND hWnd) throws IOException {
-    String gettime = Gettime.screentime();
+    Date dateOne = new Date(); 
+    int date = (int)dateOne.getTime();
+    String gettime = "a";//toString().date;
     HDC hdcWindow = User32.INSTANCE.GetDC(hWnd);
     HDC hdcMemDC = GDI32.INSTANCE.CreateCompatibleDC(hdcWindow);
     RECT bounds = new RECT();
     User32Extra.INSTANCE.GetClientRect(hWnd, bounds);
-    int width = bounds.right - bounds.left;
-    int height = bounds.bottom - bounds.top;
+    int width = 1280;//bounds.right - bounds.left;
+    int height = 720;//bounds.bottom - bounds.top;
 
     HBITMAP hBitmap = GDI32.INSTANCE.CreateCompatibleBitmap(hdcWindow, width, height);
     HANDLE hOld = GDI32.INSTANCE.SelectObject(hdcMemDC, hBitmap);
