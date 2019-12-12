@@ -40,8 +40,8 @@ public BufferedImage capture(HWND hWnd) throws IOException {
     HDC hdcMemDC = GDI32.INSTANCE.CreateCompatibleDC(hdcWindow);
     RECT bounds = new RECT();
     User32Extra.INSTANCE.GetClientRect(hWnd, bounds);
-    int width = 1280;//bounds.right - bounds.left;
-    int height = 720;//bounds.bottom - bounds.top;
+    int width = 1980;//bounds.right - bounds.left;
+    int height = 1080;//bounds.bottom - bounds.top;
 
     HBITMAP hBitmap = GDI32.INSTANCE.CreateCompatibleBitmap(hdcWindow, width, height);
     HANDLE hOld = GDI32.INSTANCE.SelectObject(hdcMemDC, hBitmap);
@@ -61,7 +61,7 @@ public BufferedImage capture(HWND hWnd) throws IOException {
     image.setRGB(0, 0, width, height, buffer.getIntArray(0, width * height), 0, width);
     GDI32.INSTANCE.DeleteObject(hBitmap);
     User32.INSTANCE.ReleaseDC(hWnd, hdcWindow);
-    File outputfile = new File("C:\\image" +gettime+ ".jpg");
+    File outputfile = new File("C:\\MOBILE\\Projects\\Imgs\\" +gettime+ ".jpg");
     ImageIO.write(image, "jpg", outputfile);
     return image;
 }
